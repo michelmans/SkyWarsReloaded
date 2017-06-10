@@ -49,6 +49,14 @@
              </execution>
             </executions>
           </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>1.7</source>
+                  <target>1.7</target>
+              </configuration>
+          </plugin>
       </plugins>
    </build>
    <repositories>
@@ -67,9 +75,9 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.8.6-R0.1</version>
+            <version>1.12-R0.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/craftbukkit-1.8.4.jar</systemPath>
+            <systemPath>${project.basedir}/lib/craftbukkit-1.12.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.walrusone.skywars</groupId>
@@ -79,45 +87,13 @@
             <type>jar</type>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>com.walrusone.skywars</groupId>
-            <artifactId>skywarsreloadedplugin-v1_7_R3</artifactId>
-            <version>v1_7_R3</version>
-            <scope>compile</scope>
-            <type>jar</type>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.walrusone.skywars</groupId>
-            <artifactId>skywarsreloadedplugin-v1_7_R4</artifactId>
-            <version>v1_7_R4</version>
-            <scope>compile</scope>
-            <type>jar</type>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.walrusone.skywars</groupId>
-            <artifactId>skywarsreloadedplugin-v1_8_R1</artifactId>
-            <version>v1_8_R1</version>
-            <scope>compile</scope>
-            <type>jar</type>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.walrusone.skywars</groupId>
-            <artifactId>skywarsreloadedplugin-v1_8_R2</artifactId>
-            <version>v1_8_R2</version>
-            <scope>compile</scope>
-            <type>jar</type>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.walrusone.skywars</groupId>
-            <artifactId>skywarsreloadedplugin-v1_8_R3</artifactId>
-            <version>v1_8_R3</version>
-            <scope>compile</scope>
-            <type>jar</type>
-            <optional>true</optional>
-        </dependency>
+       <dependency>
+           <groupId>com.walrusone.skywars</groupId>
+           <artifactId>skywarsreloadedplugin-v1_12_R1</artifactId>
+           <version>v1_12_R1</version>
+           <scope>compile</scope>
+           <type>jar</type>
+           <optional>true</optional>
+       </dependency>
    </dependencies>
 </project>

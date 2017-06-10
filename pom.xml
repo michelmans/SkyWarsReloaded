@@ -12,11 +12,7 @@
 
   <modules>
     <module>API</module>
-    <module>v1_7_R3</module>
-    <module>v1_7_R4</module>
-    <module>v1_8_R1</module>
-    <module>v1_8_R2</module>
-    <module>v1_8_R3</module>    
+    <module>v1_12_R1</module>
     <module>SkyWarsReloadedPlugin</module>
   </modules>
 </project>

@@ -493,7 +493,7 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
     private void getSWRDatabase() {
     	try {
 			db = new Database();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	try {
