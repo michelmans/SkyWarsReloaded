@@ -23,11 +23,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -148,7 +145,6 @@ public class PlayerListener implements Listener {
 			}, 5L);
 		} else  {
 			if (inLobbyWorld(player)) {
-				SkyWarsReloaded.getNMS().sendTitle(player, 20, 60, 20, SkyWarsReloaded.getMessaging().getMessage("titles.joinServerTitle"), SkyWarsReloaded.getMessaging().getMessage("titles.joinServerSubtitle"));
 				givePlayerItems(player);
 			} else {
 				removePlayerItems(player);
@@ -233,6 +229,47 @@ public class PlayerListener implements Listener {
 			} else {
 				e.setCancelled(true);
 				gPlayer.getP().sendMessage(new Messaging.MessageFormatter().format("error.no-perm-spectating"));
+			}
+		}
+	}
+
+	@EventHandler
+	public void onEntityPortalEnterEvent(EntityPortalEnterEvent e){
+		if(e.getEntity() instanceof Player){
+			Player p = ((Player) e.getEntity()).getPlayer();
+			GamePlayer gPlayer = SkyWarsReloaded.getPC().getPlayer(p.getUniqueId());
+			Location spawn = SkyWarsReloaded.getCfg().getSpawn();
+			if (spawn != null) {
+				if (!SkyWarsReloaded.getCfg().signJoinMode()) {
+					World world = spawn.getWorld();
+					if (!gPlayer.inGame() && p.getLocation().getWorld().equals(world)) {
+						Game game = SkyWarsReloaded.getGC().findGame();
+						if (game != null) {
+							game.addPlayer(gPlayer);
+						} else {
+							SkyWarsReloaded.getGC().addToQueue(gPlayer);
+							gPlayer.getP().sendMessage(new Messaging.MessageFormatter().format("game.no-game-available"));
+						}
+					}
+				} else {
+					World world = spawn.getWorld();
+					if (!gPlayer.inGame() && p.getLocation().getWorld().equals(world)) {
+						Game game = findGame();
+						int i = 0;
+						while (i < 3) {
+							if (game != null && game.getState() == GameState.PREGAME && !game.isFull()) {
+								game.addPlayer(gPlayer);
+								break;
+							} else {
+								i++;
+								game = findGame();
+							}
+						}
+					}
+				}
+			} else {
+				p.sendMessage(ChatColor.RED + "YOU MUST SET SPAWN IN THE LOBBY WORLD WITH /SWR SETSPAWN BEFORE STARTING A GAME");
+				SkyWarsReloaded.get().getLogger().info("YOU MUST SET SPAWN IN THE LOBBY WORLD WITH /SWR SETSPAWN BEFORE STARTING A GAME");
 			}
 		}
 	}
