@@ -115,8 +115,8 @@ public class Game {
 				specSpawn = new Location(mapWorld, x, y, z);
 			}
 	    	minPlayers = (int) (numberOfSpawns * SkyWarsReloaded.getCfg().getMinPercentPlayers()/100);
-	    	if (minPlayers < 1) {
-	    		minPlayers = 1;
+	    	if (minPlayers < 2) {
+	    		minPlayers = 2;
 	    	}
 			for (int i = 1; i <= numberOfSpawns; i++) {
 				availableSpawns.put(i, null);
@@ -1241,7 +1241,7 @@ public class Game {
 		} else if (weather.equalsIgnoreCase("snow")) {
 			for (int x = min; x < max; x++) {
 				for (int z = min; z < max; z++) {
-					world.setBiome(x, z, Biome.ICE_PLAINS);
+					world.setBiome(x, z, Biome.ICE_FLATS);
 				}
 			}
 			world.setStorm(true);
